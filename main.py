@@ -2,11 +2,10 @@ import yt_dlp
 import os
 
 URL = input("Enter Youtube Video Link : ")
-PATH_THIS = "C:/Users/ADMIN/Desktop/Black_Ink/Py/Youtube downloader/vid/%(title)s.%(ext)s"
 DEFAULTQUALITY = "bestvideo+bestaudio/best"
 
 HOME_DIR = os.path.expanduser("~")
-DEFAULT_PATH = PATH_THIS #os.path.join(HOME_DIR, "Downloads", "%(title)s.%(ext)s")
+DEFAULT_PATH = os.path.join(HOME_DIR, "Downloads", "%(title)s.%(ext)s")
 
 def getformatid():
     with yt_dlp.YoutubeDL() as ydl:
@@ -32,6 +31,7 @@ def download_keep_vid_audio(quality = DEFAULTQUALITY, path = DEFAULT_PATH):
     }
     with yt_dlp.YoutubeDL(ydl_opts) as  ydl:
         ydl.download([URL])
+    print(f"File saved at: {DEFAULT_PATH}")
 
 
 def download_vid(quality = DEFAULTQUALITY, path = DEFAULT_PATH):
@@ -42,15 +42,12 @@ def download_vid(quality = DEFAULTQUALITY, path = DEFAULT_PATH):
             }
     with yt_dlp.YoutubeDL(ydl_opts) as  ydl:
         ydl.download([URL])
+    print(f"File saved at: {DEFAULT_PATH}")
 
 def change_quality(quality):
-    global DEFAULT_PATH
+    global DEFAULTQUALITY
     if quality!="":
-        DEFAULT_PATH = quality
-
-#getformatid()
-#download_keep_vid_audio()
-#download_vid('625+234', path=PATH_THIS)
+        DEFAULTQUALITY = quality
 
 print("\nSELECT FROM BELOW :- \n1 : Get the format IDs \n2 : DOWNLOAD THE VIDEO\n3 : DOWNLOAD VIDEO+AUDIO, VIDEO, AUDIO\n")
 choice = int(input("ENTER YOUR SELECTION : "))
